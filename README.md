@@ -7,6 +7,7 @@ A nutrition information app written in Flutter
 - [ ] Refactor the code to use best practices
   - [x] <strike> Create and apply a theme </strike>
   - [x] <strike> Add another theme and toggle between themes using a theme manager class </strike>
+  - [x] <strike> Refactor Home page to have better code segmentation </strike>
 
 ## Contents
 * [Why This Project?](#why-this-project)
