@@ -19,7 +19,7 @@ A nutrition information app written in Flutter
 ---
 
 ## Why this project?
-This project is still in development and has no "Why this project?" section yet. Please check back later!
+The motivation behind this project initially started due to my interest in gaining more exposure to Flutter. I wanted to build a simple, low-pressure application where I can sandbox and get used to the language and its features. After building a rough UI, I thoroughly came to enjoy the language and became inspired to implement good coding practices in the project. 
 
 <div align="right">[ <a href="#contents">↑ Back to top ↑</a> ]</div>
 
