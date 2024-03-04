@@ -39,7 +39,9 @@ This project is still in development and has no usage guide yet. Please check ba
 ---
 
 ## Screenshots
-![image](https://github.com/DillonWall/Nutrition-App/assets/49173127/a6e3db04-65f9-4e70-ac05-48c48a38e4a4)
+![LightTheme](https://github.com/DillonWall/Nutrition-App/assets/49173127/b5fcb383-1522-458b-89a0-3b58b46c2529)
+![DarkTheme](https://github.com/DillonWall/Nutrition-App/assets/49173127/27a4fb73-caec-47d8-9be3-a74825e00cee)
+
 
 <div align="right">[ <a href="#contents">↑ Back to top ↑</a> ]</div>
 
