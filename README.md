@@ -39,8 +39,8 @@ This project is still in development and has no usage guide yet. Please check ba
 ---
 
 ## Screenshots
-![LightTheme](https://github.com/DillonWall/Nutrition-App/assets/49173127/b5fcb383-1522-458b-89a0-3b58b46c2529)
-![DarkTheme](https://github.com/DillonWall/Nutrition-App/assets/49173127/27a4fb73-caec-47d8-9be3-a74825e00cee)
+![LightThemeMedium](https://github.com/DillonWall/Nutrition-App/assets/49173127/c61942b7-eb3d-49e5-99bb-bc0338a738d2)
+![DarkThemeMedium](https://github.com/DillonWall/Nutrition-App/assets/49173127/853f090f-034a-44f5-852f-e3951b157eb8)
 
 
 <div align="right">[ <a href="#contents">↑ Back to top ↑</a> ]</div>
