@@ -5,6 +5,8 @@ A nutrition information app written in Flutter
 - [x] <strike> Initial project and dev environment setup </strike>
 - [x] <strike> Create rough design of the UI </strike>
 - [ ] Refactor the code to use best practices
+  - [x] <strike> Create and apply a theme </strike>
+  - [x] <strike> Add another theme and toggle between themes using a theme manager class </strike>
 
 ## Contents
 * [Why This Project?](#why-this-project)
