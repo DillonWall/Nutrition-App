@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.only(left: 20),
           child: Text(
             'Popular',
             style: Theme.of(context).textTheme.headlineSmall,
