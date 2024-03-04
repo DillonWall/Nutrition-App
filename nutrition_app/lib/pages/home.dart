@@ -131,14 +131,16 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         const SizedBox(height: 15),
-        Container(
+        SizedBox(
           height: 240,
           child: ListView.separated(
             itemBuilder: (context, index) {
               return Container(
                 width: 210,
                 decoration: BoxDecoration(
-                  color: diets[index].boxColor.withOpacity(0.3),
+                  color: diets[index].isAltBoxColor
+                      ? Theme.of(context).colorScheme.tertiaryContainer.withOpacity(0.5)
+                      : Theme.of(context).colorScheme.secondaryContainer.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Column(
@@ -149,19 +151,11 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Text(
                           diets[index].name,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                            fontSize: 16,
-                          ),
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                         Text(
                           '${diets[index].level} | ${diets[index].duration} | ${diets[index].calorie}',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w400,
-                            color: Color(0xff78B6F72),
-                            fontSize: 13,
-                          ),
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ],
                     ),
@@ -220,7 +214,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         const SizedBox(height: 15),
-        Container(
+        SizedBox(
           height: 150,
           child: ListView.separated(
             itemCount: categories.length,
@@ -231,7 +225,9 @@ class _HomePageState extends State<HomePage> {
               return Container(
                 width: 100,
                 decoration: BoxDecoration(
-                  color: categories[index].boxColor.withOpacity(0.3),
+                  color: categories[index].isAltBoxColor
+                      ? Theme.of(context).colorScheme.tertiaryContainer.withOpacity(0.8)
+                      : Theme.of(context).colorScheme.secondaryContainer.withOpacity(0.8),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Column(
@@ -251,11 +247,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Text(
                       categories[index].name,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                      ),
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ],
                 ),
@@ -272,7 +264,7 @@ class _HomePageState extends State<HomePage> {
       margin: const EdgeInsets.only(top: 40, left: 20, right: 20),
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
-          color: const Color(0xff1D1617).withOpacity(0.11),
+          color: Theme.of(context).colorScheme.shadow.withOpacity(0.3),
           blurRadius: 40,
           spreadRadius: 0.0,
         )
@@ -280,32 +272,34 @@ class _HomePageState extends State<HomePage> {
       child: TextField(
         decoration: InputDecoration(
             filled: true,
-            fillColor: Colors.white,
+            fillColor: Theme.of(context).colorScheme.primaryContainer,
             contentPadding: const EdgeInsets.all(15),
             hintText: 'Search Pancake',
-            hintStyle: const TextStyle(
-              color: Color(0xffDDDADA),
-              fontSize: 14,
-            ),
             prefixIcon: Padding(
               padding: const EdgeInsets.all(12),
-              child: SvgPicture.asset('assets/icons/Search.svg'),
+              child: SvgPicture.asset(
+                'assets/icons/Search.svg',
+                colorFilter: ColorFilter.mode(Theme.of(context).hintColor, BlendMode.srcIn),
+              ),
             ),
-            suffixIcon: Container(
+            suffixIcon: SizedBox(
               width: 100,
               child: IntrinsicHeight(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const VerticalDivider(
-                      color: Colors.black,
+                    VerticalDivider(
+                      color: Theme.of(context).hintColor,
                       indent: 10,
                       endIndent: 10,
-                      thickness: 0.1,
+                      thickness: 1,
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: SvgPicture.asset('assets/icons/Filter.svg'),
+                      padding: const EdgeInsets.only(left: 8, right: 20),
+                      child: SvgPicture.asset(
+                        'assets/icons/Filter.svg',
+                        colorFilter: ColorFilter.mode(Theme.of(context).hintColor, BlendMode.srcIn),
+                      ),
                     ),
                   ],
                 ),
@@ -321,12 +315,9 @@ class _HomePageState extends State<HomePage> {
 
   AppBar appBar() {
     return AppBar(
-      title: const Text(
+      title: Text(
         'Breakfast',
-        style: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-        ),
+        style: Theme.of(context).textTheme.headlineLarge,
       ),
       centerTitle: true,
       leading: GestureDetector(
@@ -335,11 +326,13 @@ class _HomePageState extends State<HomePage> {
           margin: const EdgeInsets.all(10),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: const Color(0xffF7F8F8),
+            color: Theme.of(context).colorScheme.primaryContainer,
             borderRadius: BorderRadius.circular(10),
           ),
           child: SvgPicture.asset(
             'assets/icons/Arrow - Left 2.svg',
+            colorFilter:
+                ColorFilter.mode(Theme.of(context).colorScheme.onPrimaryContainer, BlendMode.srcIn),
             width: 20,
             height: 20,
           ),
@@ -353,11 +346,13 @@ class _HomePageState extends State<HomePage> {
             alignment: Alignment.center,
             width: 37,
             decoration: BoxDecoration(
-              color: const Color(0xffF7F8F8),
+              color: Theme.of(context).colorScheme.primaryContainer,
               borderRadius: BorderRadius.circular(10),
             ),
             child: SvgPicture.asset(
               'assets/icons/dots.svg',
+              colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.onPrimaryContainer, BlendMode.srcIn),
               width: 5,
               height: 5,
             ),

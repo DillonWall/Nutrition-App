@@ -6,7 +6,7 @@ class DietModel {
   String level;
   String duration;
   String calorie;
-  Color boxColor;
+  bool isAltBoxColor;
   bool viewIsSelected;
 
   DietModel({
@@ -15,7 +15,7 @@ class DietModel {
     required this.level,
     required this.duration,
     required this.calorie,
-    required this.boxColor,
+    required this.isAltBoxColor,
     required this.viewIsSelected,
   });
 
@@ -29,7 +29,7 @@ class DietModel {
       duration: '30mins',
       calorie: '180kCal',
       viewIsSelected: true,
-      boxColor: const Color(0xff9DCEFF),
+      isAltBoxColor: false,
     ));
 
     diets.add(DietModel(
@@ -39,7 +39,7 @@ class DietModel {
       duration: '20mins',
       calorie: '230kCal',
       viewIsSelected: false,
-      boxColor: const Color(0xffEEA4CE),
+      isAltBoxColor: true,
     ));
 
     return diets;

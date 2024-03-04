@@ -4,13 +4,21 @@ class ThemeCollection {
   // Generic styles
   static const String _fontFamily = 'Poppins';
   static const TextTheme _textTheme = TextTheme(
+    headlineLarge: TextStyle(
+      fontSize: 22,
+      fontWeight: FontWeight.bold,
+    ),
     headlineSmall: TextStyle(
       fontSize: 18,
       fontWeight: FontWeight.w600,
     ),
-    titleSmall: TextStyle(
+    titleMedium: TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w500,
+    ),
+    titleSmall: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
     ),
     bodyMedium: TextStyle(
       fontSize: 13,
@@ -20,19 +28,18 @@ class ThemeCollection {
 
   // Light theme
   static const ColorScheme _lightColorScheme = ColorScheme.light(
-    primary: Color.fromARGB(255, 193, 255, 189),
-    onPrimaryContainer: Color(0xff7B6F72),
+    background: Color.fromARGB(255, 244, 248, 254),
+    primary: Color.fromARGB(255, 229, 240, 255),
+    primaryContainer: Color.fromARGB(255, 245, 249, 255),
+    onPrimaryContainer: Color.fromARGB(255, 60, 60, 60),
+    secondary: Color(0xff7B6F72),
+    secondaryContainer: Color(0xff9DCEFF),
+    tertiaryContainer: Color(0xffEEA4CE),
   );
   static final TextTheme _lightTextTheme = _textTheme.merge(
     TextTheme(
-      headlineSmall: TextStyle(
-        color: _lightColorScheme.onBackground,
-      ),
-      titleSmall: TextStyle(
-        color: _lightColorScheme.onBackground,
-      ),
       bodyMedium: TextStyle(
-        color: _lightColorScheme.onPrimaryContainer,
+        color: _lightColorScheme.secondary,
       ),
     ),
   );
@@ -40,24 +47,24 @@ class ThemeCollection {
     colorScheme: _lightColorScheme,
     textTheme: _lightTextTheme,
     fontFamily: _fontFamily,
+    hintColor: const Color.fromARGB(255, 169, 169, 169),
   );
 
   // Dark theme
   static const ColorScheme _darkColorScheme = ColorScheme.dark(
-    primary: Color.fromARGB(255, 118, 221, 83),
+    background: Color.fromARGB(255, 60, 60, 60),
+    primary: Color.fromARGB(255, 26, 98, 140),
+    primaryContainer: Color.fromARGB(255, 63, 72, 77),
+    onPrimaryContainer: Color.fromARGB(255, 237, 237, 237),
+    secondary: Color.fromARGB(255, 255, 228, 207),
+    secondaryContainer: Color(0xff9DCEFF),
+    tertiaryContainer: Color(0xffEEA4CE),
     shadow: Colors.white,
-    onPrimaryContainer: Color(0xff7B6F72),
   );
   static final TextTheme _darkTextTheme = _textTheme.merge(
     TextTheme(
-      headlineSmall: TextStyle(
-        color: _darkColorScheme.onBackground,
-      ),
-      titleSmall: TextStyle(
-        color: _darkColorScheme.onBackground,
-      ),
       bodyMedium: TextStyle(
-        color: _darkColorScheme.onPrimaryContainer,
+        color: _darkColorScheme.secondary,
       ),
     ),
   );
@@ -65,5 +72,6 @@ class ThemeCollection {
     colorScheme: _darkColorScheme,
     textTheme: _darkTextTheme,
     fontFamily: _fontFamily,
+    hintColor: const Color.fromARGB(196, 234, 234, 234),
   );
 }
