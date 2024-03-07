@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nutrition_app/config/theme/theme_collection.dart';
 import 'package:nutrition_app/config/theme/theme_manager.dart';
-import 'package:nutrition_app/pages/home.dart';
+import 'package:nutrition_app/presentation/pages/home.dart';
 import 'package:provider/provider.dart';
 
 void main() {

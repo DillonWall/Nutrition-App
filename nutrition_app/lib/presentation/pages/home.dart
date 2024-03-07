@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nutrition_app/config/theme/theme_manager.dart';
-import 'package:nutrition_app/models/category_model.dart';
-import 'package:nutrition_app/models/diet_model.dart';
-import 'package:nutrition_app/models/popular_model.dart';
+import 'package:nutrition_app/data/models/category_model.dart';
+import 'package:nutrition_app/data/models/diet_model.dart';
+import 'package:nutrition_app/data/models/popular_model.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
