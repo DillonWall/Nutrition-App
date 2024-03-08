@@ -6,12 +6,12 @@ class CategoryEntity extends Equatable {
   final String? thumbnailUrl;
   final String? description;
 
-  const CategoryEntity(
+  const CategoryEntity({
     this.id,
     this.name,
     this.thumbnailUrl,
     this.description,
-  );
+  });
 
   @override
   List<Object?> get props {

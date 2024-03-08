@@ -12,7 +12,7 @@ class RecipeEntity extends Equatable {
   final List<String>? ingredients;
   final List<String>? measurements;
 
-  const RecipeEntity(
+  const RecipeEntity({
     this.id,
     this.name,
     this.category,
@@ -23,7 +23,7 @@ class RecipeEntity extends Equatable {
     this.youtubeUrl,
     this.ingredients,
     this.measurements,
-  );
+  });
 
   @override
   List<Object?> get props {
