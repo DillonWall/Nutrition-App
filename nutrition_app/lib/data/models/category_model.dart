@@ -1,41 +1,19 @@
-class CategoryModel {
-  String name;
-  String iconPath;
-  bool isAltBoxColor;
+import 'package:nutrition_app/domain/entities/category_entity.dart';
 
-  CategoryModel({
-    required this.name,
-    required this.iconPath,
-    required this.isAltBoxColor,
+class CategoryModel extends CategoryEntity {
+  const CategoryModel({
+    int? id,
+    String? name,
+    String? thumbnailUrl,
+    String? description,
   });
 
-  static List<CategoryModel> getCategories() {
-    List<CategoryModel> categories = [];
-
-    categories.add(CategoryModel(
-      name: 'Salad',
-      iconPath: 'assets/icons/plate.svg',
-      isAltBoxColor: false,
-    ));
-
-    categories.add(CategoryModel(
-      name: 'Cake',
-      iconPath: 'assets/icons/pancakes.svg',
-      isAltBoxColor: true,
-    ));
-
-    categories.add(CategoryModel(
-      name: 'Pie',
-      iconPath: 'assets/icons/pie.svg',
-      isAltBoxColor: false,
-    ));
-
-    categories.add(CategoryModel(
-      name: 'Smoothies',
-      iconPath: 'assets/icons/orange-snacks.svg',
-      isAltBoxColor: true,
-    ));
-
-    return categories;
+  factory CategoryModel.fromJson(Map<String, dynamic> map) {
+    return CategoryModel(
+      id: map["idCategory"] ?? "",
+      name: map["strCategory"] ?? "",
+      thumbnailUrl: map["strCategoryThumb"] ?? "",
+      description: map["strCategoryDescription"] ?? "",
+    );
   }
 }
