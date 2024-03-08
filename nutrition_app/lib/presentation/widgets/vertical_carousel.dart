@@ -17,6 +17,17 @@ typedef VerticalCarouselBoxShadowCallback<T> = List<BoxShadow>? Function(
 );
 
 class VerticalCarousel<T> extends StatelessWidget {
+  final BuildContext context;
+  final List<T> items;
+  final double itemHeight;
+  final double separationHeight;
+  final VerticalCarouselBoxColorCallback<T> boxColorCallback;
+  final VerticalCarouselBoxChildrenCallback<T> boxChildrenCallback;
+  final VerticalCarouselBoxShadowCallback<T> boxShadowCallback;
+  final EdgeInsetsGeometry padding;
+  final BorderRadiusGeometry itemBorderRadius;
+  final bool shrinkWrap;
+
   const VerticalCarousel({
     super.key,
     required this.context,
@@ -30,17 +41,6 @@ class VerticalCarousel<T> extends StatelessWidget {
     this.itemBorderRadius = const BorderRadius.all(Radius.circular(16)),
     this.shrinkWrap = false,
   });
-
-  final BuildContext context;
-  final List<T> items;
-  final double itemHeight;
-  final double separationHeight;
-  final VerticalCarouselBoxColorCallback<T> boxColorCallback;
-  final VerticalCarouselBoxChildrenCallback<T> boxChildrenCallback;
-  final VerticalCarouselBoxShadowCallback<T> boxShadowCallback;
-  final EdgeInsetsGeometry padding;
-  final BorderRadiusGeometry itemBorderRadius;
-  final bool shrinkWrap;
 
   @override
   Widget build(BuildContext context) {

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SearchIcon extends StatelessWidget {
+  final BuildContext context;
+  final EdgeInsetsGeometry padding;
+
   const SearchIcon({
     super.key,
     required this.context,
     this.padding = const EdgeInsets.all(12),
   });
-
-  final BuildContext context;
-  final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {

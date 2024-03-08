@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class AppBarBackButton extends StatelessWidget {
+  final BuildContext context;
+  final EdgeInsetsGeometry margin;
+
   const AppBarBackButton({
     super.key,
     required this.context,
     this.margin = const EdgeInsets.all(10),
   });
-
-  final BuildContext context;
-  final EdgeInsetsGeometry margin;
 
   @override
   Widget build(BuildContext context) {

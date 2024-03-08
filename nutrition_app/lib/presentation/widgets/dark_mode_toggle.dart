@@ -3,12 +3,12 @@ import 'package:nutrition_app/config/theme/theme_manager.dart';
 import 'package:provider/provider.dart';
 
 class DarkModeToggle extends StatelessWidget {
+  final BuildContext context;
+
   const DarkModeToggle({
     super.key,
     required this.context,
   });
-
-  final BuildContext context;
 
   @override
   Widget build(BuildContext context) {

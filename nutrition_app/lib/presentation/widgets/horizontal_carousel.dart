@@ -12,6 +12,16 @@ typedef HorizontalCarouselBoxChildrenCallback<T> = List<Widget> Function(
 );
 
 class HorizontalCarousel<T> extends StatelessWidget {
+  final BuildContext context;
+  final List<T> items;
+  final double height;
+  final double itemWidth;
+  final double separationWidth;
+  final HorizontalCarouselBoxColorCallback<T> boxColorCallback;
+  final HorizontalCarouselBoxChildrenCallback<T> boxChildrenCallback;
+  final EdgeInsetsGeometry padding;
+  final BorderRadiusGeometry itemBorderRadius;
+
   const HorizontalCarousel({
     super.key,
     required this.context,
@@ -24,16 +34,6 @@ class HorizontalCarousel<T> extends StatelessWidget {
     this.padding = const EdgeInsets.only(left: 20, right: 20),
     this.itemBorderRadius = const BorderRadius.all(Radius.circular(16)),
   });
-
-  final BuildContext context;
-  final List<T> items;
-  final double height;
-  final double itemWidth;
-  final double separationWidth;
-  final HorizontalCarouselBoxColorCallback<T> boxColorCallback;
-  final HorizontalCarouselBoxChildrenCallback<T> boxChildrenCallback;
-  final EdgeInsetsGeometry padding;
-  final BorderRadiusGeometry itemBorderRadius;
 
   @override
   Widget build(BuildContext context) {
