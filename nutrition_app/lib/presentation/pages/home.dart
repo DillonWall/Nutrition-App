@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nutrition_app/data/models/category_model.dart';
-import 'package:nutrition_app/data/models/diet_model.dart';
-import 'package:nutrition_app/data/models/popular_model.dart';
+import 'package:nutrition_app/data/models/recipe_model.dart';
+import 'package:nutrition_app/data/models/popular_recipe_model.dart';
 import 'package:nutrition_app/presentation/widgets/app_bar_back_button.dart';
 import 'package:nutrition_app/presentation/widgets/circle_icon.dart';
 import 'package:nutrition_app/presentation/widgets/dark_mode_toggle.dart';
@@ -23,13 +23,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<CategoryModel> categories = [];
-  List<DietModel> diets = [];
-  List<PopularDietsModel> popularDiets = [];
+  List<RecipeModel> diets = [];
+  List<PopularRecipeModel> popularDiets = [];
 
   void _getInitialInfo() {
     categories = CategoryModel.getCategories();
-    diets = DietModel.getDiets();
-    popularDiets = PopularDietsModel.getPopularDiets();
+    diets = RecipeModel.getDiets();
+    popularDiets = PopularRecipeModel.getPopularDiets();
   }
 
   @override
@@ -144,7 +144,7 @@ class _HomePageState extends State<HomePage> {
       children: [
         SmallHeadline(context: context, text: "Recommendation\nfor Diet"),
         const SizedBox(height: 15),
-        HorizontalCarousel<DietModel>(
+        HorizontalCarousel<RecipeModel>(
           context: context,
           items: diets,
           height: 240,
@@ -198,7 +198,7 @@ class _HomePageState extends State<HomePage> {
       children: [
         SmallHeadline(context: context, text: "Popular"),
         const SizedBox(height: 15),
-        VerticalCarousel<PopularDietsModel>(
+        VerticalCarousel<PopularRecipeModel>(
           context: context,
           items: popularDiets,
           itemHeight: 115,
