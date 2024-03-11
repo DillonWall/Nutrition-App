@@ -9,6 +9,7 @@ A nutrition information app written in Flutter
   - [x] <strike> Add another theme and toggle between themes using a theme manager class </strike>
   - [x] <strike> Refactor Home page to have better code segmentation </strike>
   - [ ] Add state management such as Bloc
+  - [ ] Implement Dependency Injection
 - [ ] Interact with an API to pull data
 
 ## Contents
