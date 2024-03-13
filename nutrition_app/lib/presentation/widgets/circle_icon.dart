@@ -1,8 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:nutrition_app/core/constants/constants.dart';
 
 class CircleIcon extends StatelessWidget {
-  final String iconPath;
+  final String? iconUrl;
   final double width;
   final double height;
   final Color backgroundColor;
@@ -10,7 +11,7 @@ class CircleIcon extends StatelessWidget {
 
   const CircleIcon({
     super.key,
-    required this.iconPath,
+    required this.iconUrl,
     required this.width,
     required this.height,
     this.backgroundColor = Colors.white,
@@ -28,7 +29,13 @@ class CircleIcon extends StatelessWidget {
       ),
       child: Padding(
         padding: padding,
-        child: SvgPicture.asset(iconPath),
+        child: CachedNetworkImage(
+          imageUrl: iconUrl ?? placeholderURL,
+          placeholder: (context, url) => const CircularProgressIndicator(),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
+          width: width,
+          height: height,
+        ),
       ),
     );
   }

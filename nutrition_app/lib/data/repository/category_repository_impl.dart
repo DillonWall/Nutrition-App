@@ -16,7 +16,7 @@ class CategoryRepositoryImpl implements CategoryRepository {
       final httpResponse = await _mealApiService.getCategories();
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
-        return DataSuccess(httpResponse.data);
+        return DataSuccess(httpResponse.data.categories);
       } else {
         return DataFailed(
           DioException(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nutrition_app/config/theme/theme_manager.dart';
-import 'package:provider/provider.dart';
 
 class DarkModeToggle extends StatelessWidget {
   final BuildContext context;
@@ -12,11 +11,13 @@ class DarkModeToggle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Switch(
-      value: Provider.of<ThemeManager>(context).isDark,
-      onChanged: (newValue) {
-        Provider.of<ThemeManager>(context, listen: false).toggleTheme();
-      },
-    );
+    // return Switch(
+    //   value: Provider.of<ThemeManager>(context).isDark,
+    //   onChanged: (newValue) {
+    //     Provider.of<ThemeManager>(context, listen: false).toggleTheme();
+    //   },
+    // );
+    return Container();
+    //TODO: fix theme manager
   }
 }

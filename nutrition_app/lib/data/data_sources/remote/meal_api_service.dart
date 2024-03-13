@@ -11,8 +11,8 @@ abstract class MealApiService {
   factory MealApiService(Dio dio) = _MealApiService;
 
   @GET('/random.php')
-  Future<HttpResponse<RecipeModel>> getRandomRecipe();
+  Future<HttpResponse<RecipeResponseModel>> getRandomRecipe();
 
   @GET('/categories.php')
-  Future<HttpResponse<List<CategoryModel>>> getCategories();
+  Future<HttpResponse<CategoryResponseModel>> getCategories();
 }

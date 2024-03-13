@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nutrition_app/config/theme/theme_collection.dart';
 import 'package:nutrition_app/config/theme/theme_manager.dart';
+import 'package:nutrition_app/injection_container.dart';
+import 'package:nutrition_app/presentation/bloc/categories/remote/remote_categories_bloc.dart';
+import 'package:nutrition_app/presentation/bloc/random_recipes/remote/remote_random_recipes_bloc.dart';
 import 'package:nutrition_app/presentation/pages/home.dart';
-import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  await initializeDependencies();
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<RemoteCategoriesBloc>(
+          create: (context) => sl()..add(const GetCategories()),
+        ),
+        BlocProvider<RemoteRandomRecipesBloc>(
+          create: (context) => sl()..add(const GetRandomRecipes(10)),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -14,21 +30,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        Provider.value(value: ThemeManager()),
-        StreamProvider<ThemeData>(
-          create: (context) => Provider.of<ThemeManager>(context, listen: false).theme,
-          initialData: ThemeCollection.lightTheme,
-        )
-      ],
-      child: Consumer<ThemeData>(
-        builder: (context, theme, child) => MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: theme,
-          home: const HomePage(),
-        ),
-      ),
+    // TODO: fix theme manager
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeCollection.lightTheme,
+      home: const HomePage(),
     );
   }
 }

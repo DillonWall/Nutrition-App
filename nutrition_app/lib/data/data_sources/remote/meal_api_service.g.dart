@@ -21,13 +21,13 @@ class _MealApiService implements MealApiService {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<RecipeModel>> getRandomRecipe() async {
+  Future<HttpResponse<RecipeResponseModel>> getRandomRecipe() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<RecipeModel>>(Options(
+        _setStreamType<HttpResponse<RecipeResponseModel>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -43,19 +43,19 @@ class _MealApiService implements MealApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = RecipeModel.fromJson(_result.data!);
+    final value = RecipeResponseModel.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<List<CategoryModel>>> getCategories() async {
+  Future<HttpResponse<CategoryResponseModel>> getCategories() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<HttpResponse<List<CategoryModel>>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<CategoryResponseModel>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -71,9 +71,7 @@ class _MealApiService implements MealApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) => CategoryModel.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = CategoryResponseModel.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

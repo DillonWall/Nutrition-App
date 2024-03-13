@@ -1,5 +1,18 @@
 import 'package:nutrition_app/domain/entities/recipe_entity.dart';
 
+class RecipeResponseModel {
+  RecipeModel recipe;
+
+  RecipeResponseModel({required this.recipe});
+
+  factory RecipeResponseModel.fromJson(Map<String, dynamic> recipeResponseData) {
+    return RecipeResponseModel(
+        recipe: ((recipeResponseData['meals'] ?? []) as List<dynamic>)
+            .map((dynamic recipe) => RecipeModel.fromJson(recipe))
+            .toList()[0]); // Get the first element (the API returns an array of only one meal)
+  }
+}
+
 class RecipeModel extends RecipeEntity {
   const RecipeModel({
     int? id,
@@ -8,7 +21,7 @@ class RecipeModel extends RecipeEntity {
     String? area,
     String? instructions,
     String? thumbnailUrl,
-    List<String>? tags,
+    String? tags,
     String? youtubeUrl,
     List<String>? ingredients,
     List<String>? measurements,
@@ -16,7 +29,7 @@ class RecipeModel extends RecipeEntity {
 
   factory RecipeModel.fromJson(Map<String, dynamic> map) {
     return RecipeModel(
-      id: map["idMeal"] ?? "",
+      id: int.tryParse(map["idMeal"]) ?? -1,
       name: map["strMeal"] ?? "",
       category: map["strCategory"] ?? "",
       area: map["strArea"] ?? "",

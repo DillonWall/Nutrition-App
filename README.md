@@ -15,7 +15,7 @@ A nutrition information app written in Flutter
 ## Contents
 * [Why This Project?](#why-this-project)
 * [Quick Start](#quick-start)
-* [Usage Guide](#usage-guide)
+* [Development Setup](#development-setup)
 * [Screenshots](#screenshots)
 * [Contributing](#contributing)
 
@@ -37,8 +37,11 @@ This project is still in development and has no quick start guide yet. Please ch
 
 ---
 
-## Usage Guide
-This project is still in development and has no usage guide yet. Please check back later!
+## Development Setup
+1. Ensure you have a flutter development environment setup.
+2. Pull the code from this repo.
+3. Cd to `cd nutrition_app/` and run `dart run build_runner build`
+4. Run the code and ensure the app starts correctly.
 
 <div align="right">[ <a href="#contents">↑ Back to top ↑</a> ]</div>
 

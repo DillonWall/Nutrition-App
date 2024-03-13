@@ -1,8 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nutrition_app/data/models/category_model.dart';
-import 'package:nutrition_app/data/models/recipe_model.dart';
-import 'package:nutrition_app/data/models/popular_recipe_model.dart';
+import 'package:nutrition_app/core/constants/constants.dart';
+import 'package:nutrition_app/domain/entities/category_entity.dart';
+import 'package:nutrition_app/domain/entities/recipe_entity.dart';
+import 'package:nutrition_app/presentation/bloc/categories/remote/remote_categories_bloc.dart';
+import 'package:nutrition_app/presentation/bloc/random_recipes/remote/remote_random_recipes_bloc.dart';
 import 'package:nutrition_app/presentation/widgets/app_bar_back_button.dart';
 import 'package:nutrition_app/presentation/widgets/circle_icon.dart';
 import 'package:nutrition_app/presentation/widgets/dark_mode_toggle.dart';
@@ -22,14 +27,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<CategoryModel> categories = [];
-  List<RecipeModel> diets = [];
-  List<PopularRecipeModel> popularDiets = [];
+  // List<CategoryModel> categories = [];
+  // List<RecipeModel> diets = [];
+  // List<PopularRecipeModel> popularDiets = [];
 
   void _getInitialInfo() {
-    categories = CategoryModel.getCategories();
-    diets = RecipeModel.getDiets();
-    popularDiets = PopularRecipeModel.getPopularDiets();
+    // categories = CategoryModel.getCategories();
+    // diets = RecipeModel.getDiets();
+    // popularDiets = PopularRecipeModel.getPopularDiets();
   }
 
   @override
@@ -103,32 +108,49 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Column _categoriesSection() {
+  BlocBuilder<RemoteCategoriesBloc, RemoteCategoriesState> _categoriesSection() {
+    return BlocBuilder<RemoteCategoriesBloc, RemoteCategoriesState>(
+      builder: (_, state) {
+        if (state is RemoteCategoriesLoading) {
+          return const Center(child: CupertinoActivityIndicator());
+        }
+        if (state is RemoteCategoriesError) {
+          return const Center(child: Icon(Icons.refresh));
+        }
+        if (state is RemoteCategoriesDone) {
+          return _categoriesSectionLoaded(state.categories!);
+        }
+        return Container();
+      },
+    );
+  }
+
+  Column _categoriesSectionLoaded(List<CategoryEntity> categories) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SmallHeadline(context: context, text: "Category"),
         const SizedBox(height: 15),
-        HorizontalCarousel<CategoryModel>(
+        HorizontalCarousel<CategoryEntity>(
           context: context,
           items: categories,
           height: 150,
           itemWidth: 100,
           separationWidth: 25,
           boxColorCallback: (context, items, index) {
-            return items[index].isAltBoxColor
+            return index % 2 == 0
                 ? Theme.of(context).colorScheme.tertiaryContainer.withOpacity(0.8)
                 : Theme.of(context).colorScheme.secondaryContainer.withOpacity(0.8);
           },
           boxChildrenCallback: (context, items, index) {
             return [
               CircleIcon(
-                iconPath: items[index].iconPath,
+                iconUrl: items[index].thumbnailUrl,
                 width: 50,
                 height: 50,
               ),
               Text(
-                items[index].name,
+                items[index].name ?? '...',
                 style: Theme.of(context).textTheme.titleSmall,
               ),
             ];
@@ -138,51 +160,72 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Column _dietSection() {
+  BlocBuilder<RemoteRandomRecipesBloc, RemoteRandomRecipesState> _dietSection() {
+    return BlocBuilder<RemoteRandomRecipesBloc, RemoteRandomRecipesState>(
+      builder: (_, state) {
+        if (state is RemoteRandomRecipesLoading) {
+          return const Center(child: CupertinoActivityIndicator());
+        }
+        if (state is RemoteRandomRecipesError) {
+          return const Center(child: Icon(Icons.refresh));
+        }
+        if (state is RemoteRandomRecipesDone) {
+          return _dietSectionLoaded(state.recipes!);
+        }
+        return Container();
+      },
+    );
+  }
+
+  Column _dietSectionLoaded(List<RecipeEntity> recipes) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SmallHeadline(context: context, text: "Recommendation\nfor Diet"),
         const SizedBox(height: 15),
-        HorizontalCarousel<RecipeModel>(
+        HorizontalCarousel<RecipeEntity>(
           context: context,
-          items: diets,
+          items: recipes,
           height: 240,
           itemWidth: 210,
           separationWidth: 25,
           itemBorderRadius: BorderRadius.circular(20),
           boxColorCallback: (context, items, index) {
-            return items[index].isAltBoxColor
+            return index % 2 == 0
                 ? Theme.of(context).colorScheme.tertiaryContainer.withOpacity(0.5)
                 : Theme.of(context).colorScheme.secondaryContainer.withOpacity(0.5);
           },
           boxChildrenCallback: (context, items, index) {
             return [
-              SvgPicture.asset(diets[index].iconPath),
+              CachedNetworkImage(
+                imageUrl: recipes[index].thumbnailUrl ?? placeholderURL,
+                placeholder: (context, url) => const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+              ),
               Column(
                 children: [
                   Text(
-                    diets[index].name,
+                    recipes[index].name ?? '...',
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   Text(
-                    '${diets[index].level} | ${diets[index].duration} | ${diets[index].calorie}',
+                    '${recipes[index].category} | ${recipes[index].area} | ${recipes[index].youtubeUrl}',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],
               ),
-              GradientButton(
+              const GradientButton(
                 text: 'View',
                 width: 130,
                 height: 45,
                 textStyle: TextStyle(
-                  color: diets[index].viewIsSelected ? Colors.white : const Color(0xffC58BF2),
+                  color: Colors.white,
                   fontWeight: FontWeight.w600,
                   fontSize: 14,
                 ),
                 colors: [
-                  diets[index].viewIsSelected ? const Color(0xff9DCEFF) : Colors.transparent,
-                  diets[index].viewIsSelected ? const Color(0xff92A3FD) : Colors.transparent,
+                  Color(0xff9DCEFF),
+                  Color(0xff92A3FD),
                 ],
               ),
             ];
@@ -192,30 +235,46 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Column _popularSection() {
+  BlocBuilder<RemoteRandomRecipesBloc, RemoteRandomRecipesState> _popularSection() {
+    return BlocBuilder<RemoteRandomRecipesBloc, RemoteRandomRecipesState>(
+      builder: (_, state) {
+        if (state is RemoteRandomRecipesLoading) {
+          return const Center(child: CupertinoActivityIndicator());
+        }
+        if (state is RemoteRandomRecipesError) {
+          return const Center(child: Icon(Icons.refresh));
+        }
+        if (state is RemoteRandomRecipesDone) {
+          return _popularSectionLoaded(state.recipes!);
+        }
+        return Container();
+      },
+    );
+  }
+
+  Column _popularSectionLoaded(List<RecipeEntity> recipes) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SmallHeadline(context: context, text: "Popular"),
         const SizedBox(height: 15),
-        VerticalCarousel<PopularRecipeModel>(
+        VerticalCarousel<RecipeEntity>(
           context: context,
-          items: popularDiets,
+          items: recipes,
           itemHeight: 115,
           separationHeight: 25,
-          shrinkWrap: true,
           boxColorCallback: (context, items, index) {
-            return popularDiets[index].boxIsSelected
-                ? Theme.of(context).colorScheme.primaryContainer
-                : Colors.transparent;
+            return index == 0 ? Theme.of(context).colorScheme.primaryContainer : Colors.transparent;
           },
           boxShadowCallback: (context, items, index) {
-            return items[index].boxIsSelected ? [_boxShadow()] : [];
+            return index == 0 ? [_boxShadow()] : [];
           },
           boxChildrenCallback: ((context, items, index) {
             return [
-              SvgPicture.asset(
-                popularDiets[index].iconPath,
+              CachedNetworkImage(
+                imageUrl: recipes[index].thumbnailUrl ?? placeholderURL,
+                placeholder: (context, url) => const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
                 width: 65,
                 height: 65,
               ),
@@ -224,11 +283,11 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    popularDiets[index].name,
+                    recipes[index].name ?? '...',
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   Text(
-                    '${popularDiets[index].level} | ${popularDiets[index].duration} | ${popularDiets[index].calorie}',
+                    '${recipes[index].category} | ${recipes[index].area} | ${recipes[index].youtubeUrl}',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],

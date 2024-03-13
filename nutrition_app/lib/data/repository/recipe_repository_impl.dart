@@ -19,7 +19,7 @@ class RecipeRepositoryImpl implements RecipeRepository {
         if (dataStateRecipe is DataFailed) {
           return DataFailed(dataStateRecipe.error!);
         } else {
-          assert(recipies is DataSuccess);
+          assert(dataStateRecipe is DataSuccess);
           recipies.add(dataStateRecipe.data!);
         }
       }
@@ -34,7 +34,7 @@ class RecipeRepositoryImpl implements RecipeRepository {
       final httpResponse = await _mealApiService.getRandomRecipe();
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
-        return DataSuccess(httpResponse.data);
+        return DataSuccess(httpResponse.data.recipe);
       } else {
         return DataFailed(
           DioException(

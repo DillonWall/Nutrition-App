@@ -39,15 +39,16 @@ class VerticalCarousel<T> extends StatelessWidget {
     required this.boxShadowCallback,
     this.padding = const EdgeInsets.only(left: 20, right: 20),
     this.itemBorderRadius = const BorderRadius.all(Radius.circular(16)),
-    this.shrinkWrap = false,
+    this.shrinkWrap = true,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
       itemCount: items.length,
-      scrollDirection: Axis.horizontal,
+      scrollDirection: Axis.vertical,
       padding: padding,
+      shrinkWrap: shrinkWrap,
       separatorBuilder: (context, index) => SizedBox(width: separationHeight),
       itemBuilder: (context, index) {
         return Container(

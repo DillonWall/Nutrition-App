@@ -47,6 +47,7 @@ class HorizontalCarousel<T> extends StatelessWidget {
         itemBuilder: (context, index) {
           return Container(
             width: itemWidth,
+            height: height,
             decoration: BoxDecoration(
               color: boxColorCallback(context, items, index),
               borderRadius: itemBorderRadius,

@@ -15,7 +15,7 @@ class RemoteCategoriesBloc extends Bloc<RemoteCategoriesEvent, RemoteCategoriesS
     on<GetCategories>(onGetCategories);
   }
 
-  void onGetCategories(GetCategories event, Emitter<RemoteCategoriesState> emit) async {
+  Future<void> onGetCategories(GetCategories event, Emitter<RemoteCategoriesState> emit) async {
     final dataState = await _getCategoriesUseCase();
 
     if (dataState is DataSuccess && dataState.data!.isNotEmpty) {

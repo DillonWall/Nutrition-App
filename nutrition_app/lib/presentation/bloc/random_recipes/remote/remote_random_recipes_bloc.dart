@@ -16,7 +16,8 @@ class RemoteRandomRecipesBloc extends Bloc<RemoteRandomRecipesEvent, RemoteRando
     on<GetRandomRecipes>(onGetRandomRecipes);
   }
 
-  void onGetRandomRecipes(GetRandomRecipes event, Emitter<RemoteRandomRecipesState> emit) async {
+  Future<void> onGetRandomRecipes(
+      GetRandomRecipes event, Emitter<RemoteRandomRecipesState> emit) async {
     final dataState = await _getRandomRecipesUseCase();
 
     if (dataState is DataSuccess && dataState.data!.isNotEmpty) {
