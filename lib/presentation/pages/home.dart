@@ -261,6 +261,7 @@ class _HomePageState extends State<HomePage> {
         VerticalCarousel<RecipeEntity>(
           context: context,
           items: recipes,
+          height: 300,
           itemHeight: 115,
           separationHeight: 25,
           boxColorCallback: (context, items, index) {
@@ -310,7 +311,7 @@ class _HomePageState extends State<HomePage> {
   BoxShadow _boxShadow() {
     return BoxShadow(
       color: Theme.of(context).colorScheme.shadow.withOpacity(0.3),
-      blurRadius: 40,
+      blurRadius: 16,
       spreadRadius: 0.0,
     );
   }

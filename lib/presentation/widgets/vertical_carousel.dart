@@ -26,6 +26,7 @@ class VerticalCarousel<T> extends StatelessWidget {
   final VerticalCarouselBoxShadowCallback<T> boxShadowCallback;
   final EdgeInsetsGeometry padding;
   final BorderRadiusGeometry itemBorderRadius;
+  final double? height;
   final bool shrinkWrap;
 
   const VerticalCarousel({
@@ -37,18 +38,19 @@ class VerticalCarousel<T> extends StatelessWidget {
     required this.boxColorCallback,
     required this.boxChildrenCallback,
     required this.boxShadowCallback,
-    this.padding = const EdgeInsets.only(left: 20, right: 20),
+    this.padding = const EdgeInsets.all(20),
     this.itemBorderRadius = const BorderRadius.all(Radius.circular(16)),
     this.shrinkWrap = true,
+    this.height,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
+    var listView = ListView.separated(
       itemCount: items.length,
       scrollDirection: Axis.vertical,
       padding: padding,
-      shrinkWrap: shrinkWrap,
+      shrinkWrap: height == null ? true : shrinkWrap,
       separatorBuilder: (context, index) => SizedBox(width: separationHeight),
       itemBuilder: (context, index) {
         return Container(
@@ -65,5 +67,13 @@ class VerticalCarousel<T> extends StatelessWidget {
         );
       },
     );
+
+    if (height != null) {
+      return SizedBox(
+        height: height,
+        child: listView,
+      );
+    }
+    return listView;
   }
 }
