@@ -8,6 +8,7 @@ class CircleIcon extends StatelessWidget {
   final double height;
   final Color backgroundColor;
   final EdgeInsetsGeometry padding;
+  final bool fill;
 
   const CircleIcon({
     super.key,
@@ -16,10 +17,18 @@ class CircleIcon extends StatelessWidget {
     required this.height,
     this.backgroundColor = Colors.white,
     this.padding = const EdgeInsets.all(8.0),
+    this.fill = true,
   });
 
   @override
   Widget build(BuildContext context) {
+    var image = CachedNetworkImage(
+      imageUrl: iconUrl ?? placeholderURL,
+      placeholder: (context, url) => const CircularProgressIndicator(),
+      errorWidget: (context, url, error) => const Icon(Icons.error),
+      width: width,
+      height: height,
+    );
     return Container(
       width: width,
       height: height,
@@ -28,14 +37,8 @@ class CircleIcon extends StatelessWidget {
         shape: BoxShape.circle,
       ),
       child: Padding(
-        padding: padding,
-        child: CachedNetworkImage(
-          imageUrl: iconUrl ?? placeholderURL,
-          placeholder: (context, url) => const CircularProgressIndicator(),
-          errorWidget: (context, url, error) => const Icon(Icons.error),
-          width: width,
-          height: height,
-        ),
+        padding: fill ? EdgeInsets.zero : padding,
+        child: fill ? ClipOval(child: image) : image,
       ),
     );
   }

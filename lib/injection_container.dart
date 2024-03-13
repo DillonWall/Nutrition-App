@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:nutrition_app/data/data_sources/remote/meal_api_service.dart';
-import 'package:nutrition_app/data/repository/category_repository_impl.dart';
-import 'package:nutrition_app/data/repository/recipe_repository_impl.dart';
+import 'package:nutrition_app/data/repository_implementations/category_repository_impl.dart';
+import 'package:nutrition_app/data/repository_implementations/recipe_repository_impl.dart';
 import 'package:nutrition_app/domain/repository/category_repository.dart';
 import 'package:nutrition_app/domain/repository/recipe_repository.dart';
 import 'package:nutrition_app/domain/use_cases/get_categories_use_case.dart';

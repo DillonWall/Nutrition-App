@@ -33,8 +33,8 @@ class RecipeRepositoryImpl implements RecipeRepository {
     try {
       final httpResponse = await _mealApiService.getRandomRecipe();
 
-      if (httpResponse.response.statusCode == HttpStatus.ok) {
-        return DataSuccess(httpResponse.data.recipe);
+      if (httpResponse.response.statusCode == HttpStatus.ok && httpResponse.data.recipe != null) {
+        return DataSuccess(httpResponse.data.recipe!);
       } else {
         return DataFailed(
           DioException(

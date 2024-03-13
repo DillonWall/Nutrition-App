@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
   AppBar appBar() {
     return AppBar(
       title: Text(
-        'Breakfast',
+        'Recipes',
         style: Theme.of(context).textTheme.headlineLarge,
       ),
       centerTitle: true,
@@ -146,8 +146,8 @@ class _HomePageState extends State<HomePage> {
             return [
               CircleIcon(
                 iconUrl: items[index].thumbnailUrl,
-                width: 50,
-                height: 50,
+                width: 80,
+                height: 80,
               ),
               Text(
                 items[index].name ?? '...',
@@ -201,16 +201,25 @@ class _HomePageState extends State<HomePage> {
                 imageUrl: recipes[index].thumbnailUrl ?? placeholderURL,
                 placeholder: (context, url) => const CircularProgressIndicator(),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
+                width: 100,
+                height: 100,
               ),
               Column(
                 children: [
                   Text(
                     recipes[index].name ?? '...',
                     style: Theme.of(context).textTheme.titleMedium,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                   Text(
-                    '${recipes[index].category} | ${recipes[index].area} | ${recipes[index].youtubeUrl}',
+                    '${recipes[index].category} | ${recipes[index].area}',
                     style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  Text(
+                    '${recipes[index].youtubeUrl}',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    textAlign: TextAlign.center,
                   ),
                 ],
               ),
@@ -263,6 +272,8 @@ class _HomePageState extends State<HomePage> {
           items: recipes,
           height: 300,
           itemHeight: 115,
+          itemMainAxisAlignment: MainAxisAlignment.spaceBetween,
+          itemPadding: const EdgeInsets.symmetric(horizontal: 15),
           separationHeight: 25,
           boxColorCallback: (context, items, index) {
             return index == 0 ? Theme.of(context).colorScheme.primaryContainer : Colors.transparent;
@@ -271,24 +282,25 @@ class _HomePageState extends State<HomePage> {
             return index == 0 ? [_boxShadow()] : [];
           },
           boxChildrenCallback: ((context, items, index) {
+            var name = recipes[index].name ?? '...';
+            var maxNameLength = 30;
             return [
-              CachedNetworkImage(
-                imageUrl: recipes[index].thumbnailUrl ?? placeholderURL,
-                placeholder: (context, url) => const CircularProgressIndicator(),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+              CircleIcon(
+                iconUrl: recipes[index].thumbnailUrl ?? placeholderURL,
                 width: 65,
                 height: 65,
+                fill: true,
               ),
               Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    recipes[index].name ?? '...',
+                    name.length > maxNameLength ? '${name.substring(0, maxNameLength)}...' : name,
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   Text(
-                    '${recipes[index].category} | ${recipes[index].area} | ${recipes[index].youtubeUrl}',
+                    '${recipes[index].category} | ${recipes[index].area}',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],

@@ -1,34 +1,38 @@
 import 'package:nutrition_app/domain/entities/recipe_entity.dart';
 
 class RecipeResponseModel {
-  RecipeModel recipe;
+  RecipeModel? recipe;
 
   RecipeResponseModel({required this.recipe});
 
   factory RecipeResponseModel.fromJson(Map<String, dynamic> recipeResponseData) {
+    List<dynamic>? dataList = recipeResponseData['meals'];
+    if (dataList == null || dataList.isEmpty) return RecipeResponseModel(recipe: null);
+
     return RecipeResponseModel(
-        recipe: ((recipeResponseData['meals'] ?? []) as List<dynamic>)
-            .map((dynamic recipe) => RecipeModel.fromJson(recipe))
-            .toList()[0]); // Get the first element (the API returns an array of only one meal)
+      recipe: RecipeModel.fromJson(
+        dataList[0], // Get the first element (the API returns an array of only one meal)
+      ),
+    );
   }
 }
 
 class RecipeModel extends RecipeEntity {
   const RecipeModel({
-    int? id,
-    String? name,
-    String? category,
-    String? area,
-    String? instructions,
-    String? thumbnailUrl,
-    String? tags,
-    String? youtubeUrl,
-    List<String>? ingredients,
-    List<String>? measurements,
+    super.id,
+    super.name,
+    super.category,
+    super.area,
+    super.instructions,
+    super.thumbnailUrl,
+    super.tags,
+    super.youtubeUrl,
+    super.ingredients,
+    super.measurements,
   });
 
   factory RecipeModel.fromJson(Map<String, dynamic> map) {
-    return RecipeModel(
+    RecipeModel ret = RecipeModel(
       id: int.tryParse(map["idMeal"]) ?? -1,
       name: map["strMeal"] ?? "",
       category: map["strCategory"] ?? "",
@@ -82,5 +86,6 @@ class RecipeModel extends RecipeEntity {
         map["strMeasure20"] ?? "",
       ],
     );
+    return ret;
   }
 }

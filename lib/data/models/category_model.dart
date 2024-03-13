@@ -15,10 +15,10 @@ class CategoryResponseModel {
 
 class CategoryModel extends CategoryEntity {
   const CategoryModel({
-    int? id,
-    String? name,
-    String? thumbnailUrl,
-    String? description,
+    super.id,
+    super.name,
+    super.thumbnailUrl,
+    super.description,
   });
 
   factory CategoryModel.fromJson(Map<String, dynamic> map) {

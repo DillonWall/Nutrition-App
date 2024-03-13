@@ -24,8 +24,10 @@ class VerticalCarousel<T> extends StatelessWidget {
   final VerticalCarouselBoxColorCallback<T> boxColorCallback;
   final VerticalCarouselBoxChildrenCallback<T> boxChildrenCallback;
   final VerticalCarouselBoxShadowCallback<T> boxShadowCallback;
-  final EdgeInsetsGeometry padding;
+  final MainAxisAlignment itemMainAxisAlignment;
+  final EdgeInsetsGeometry itemPadding;
   final BorderRadiusGeometry itemBorderRadius;
+  final EdgeInsetsGeometry padding;
   final double? height;
   final bool shrinkWrap;
 
@@ -38,8 +40,10 @@ class VerticalCarousel<T> extends StatelessWidget {
     required this.boxColorCallback,
     required this.boxChildrenCallback,
     required this.boxShadowCallback,
-    this.padding = const EdgeInsets.all(20),
+    this.itemMainAxisAlignment = MainAxisAlignment.spaceEvenly,
+    this.itemPadding = EdgeInsets.zero,
     this.itemBorderRadius = const BorderRadius.all(Radius.circular(16)),
+    this.padding = const EdgeInsets.all(20),
     this.shrinkWrap = true,
     this.height,
   });
@@ -60,9 +64,12 @@ class VerticalCarousel<T> extends StatelessWidget {
             borderRadius: itemBorderRadius,
             boxShadow: boxShadowCallback(context, items, index),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: boxChildrenCallback(context, items, index),
+          child: Padding(
+            padding: itemPadding,
+            child: Row(
+              mainAxisAlignment: itemMainAxisAlignment,
+              children: boxChildrenCallback(context, items, index),
+            ),
           ),
         );
       },
