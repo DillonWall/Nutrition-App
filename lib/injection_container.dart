@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:nutrition_app/config/theme/theme_collection.dart';
+import 'package:nutrition_app/config/theme/theme_cubit.dart';
 import 'package:nutrition_app/data/data_sources/remote/meal_api_service.dart';
 import 'package:nutrition_app/data/repository_implementations/category_repository_impl.dart';
 import 'package:nutrition_app/data/repository_implementations/recipe_repository_impl.dart';
@@ -29,4 +31,5 @@ Future<void> initializeDependencies() async {
   // Blocs
   sl.registerFactory<RemoteCategoriesBloc>(() => RemoteCategoriesBloc(sl()));
   sl.registerFactory<RemoteRandomRecipesBloc>(() => RemoteRandomRecipesBloc(sl()));
+  sl.registerFactory<ThemeCubit>(() => ThemeCubit(ThemeCollection.lightTheme));
 }

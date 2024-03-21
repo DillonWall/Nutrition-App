@@ -27,19 +27,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // List<CategoryModel> categories = [];
-  // List<RecipeModel> diets = [];
-  // List<PopularRecipeModel> popularDiets = [];
-
-  void _getInitialInfo() {
-    // categories = CategoryModel.getCategories();
-    // diets = RecipeModel.getDiets();
-    // popularDiets = PopularRecipeModel.getPopularDiets();
-  }
-
   @override
   Widget build(BuildContext context) {
-    _getInitialInfo();
     return Scaffold(
       appBar: appBar(),
       body: ListView(

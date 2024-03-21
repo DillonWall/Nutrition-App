@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nutrition_app/config/theme/theme_collection.dart';
-import 'package:nutrition_app/config/theme/theme_manager.dart';
+import 'package:nutrition_app/config/theme/theme_cubit.dart';
 import 'package:nutrition_app/injection_container.dart';
 import 'package:nutrition_app/presentation/bloc/categories/remote/remote_categories_bloc.dart';
 import 'package:nutrition_app/presentation/bloc/random_recipes/remote/remote_random_recipes_bloc.dart';
@@ -18,6 +17,9 @@ Future<void> main() async {
         BlocProvider<RemoteRandomRecipesBloc>(
           create: (context) => sl()..add(const GetRandomRecipes(10)),
         ),
+        BlocProvider<ThemeCubit>(
+          create: (context) => sl(),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -30,11 +32,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // TODO: fix theme manager
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeCollection.lightTheme,
-      home: const HomePage(),
+    return BlocBuilder<ThemeCubit, ThemeData>(
+      builder: (context, theme) {
+        return MaterialApp(
+          title: "Nutrition App",
+          debugShowCheckedModeBanner: false,
+          theme: theme,
+          home: const HomePage(),
+        );
+      },
     );
   }
 }
