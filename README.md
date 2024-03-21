@@ -4,13 +4,13 @@ A nutrition information app written in Flutter
 ## Status
 - [x] <strike> Initial project and dev environment setup </strike>
 - [x] <strike> Create rough design of the UI </strike>
-- [ ] Refactor the code to use best practices
+- [x] <strike> Refactor the code to use best practices </strike>
   - [x] <strike> Create and apply a theme </strike>
   - [x] <strike> Add another theme and toggle between themes using a theme manager class </strike>
   - [x] <strike> Refactor Home page to have better code segmentation </strike>
   - [x] <strike> Add state management such as Bloc </strike>
   - [x] <strike> Implement Dependency Injection </strike>
-  - [ ] Fix theme manager 
+  - [x] <strike> Fix theme manager </strike>
 - [x] <strike> Interact with an API to pull data </strike>
 
 ## Contents
@@ -49,8 +49,10 @@ This project is still in development and has no quick start guide yet. Please ch
 ---
 
 ## Screenshots
-![LightThemeMedium](https://github.com/DillonWall/Nutrition-App/assets/49173127/c61942b7-eb3d-49e5-99bb-bc0338a738d2)
-![DarkThemeMedium](https://github.com/DillonWall/Nutrition-App/assets/49173127/853f090f-034a-44f5-852f-e3951b157eb8)
+
+Light Theme | Dark Theme (Switching)
+:-: | :-:
+<video src='https://github.com/DillonWall/nutrition_app/assets/49173127/7a8a9c17-b9c3-438b-abdf-0127dcda1e0a' width=180 ></video> | <video src='https://github.com/DillonWall/nutrition_app/assets/49173127/6e456dab-c92c-4bc7-a4f5-97af877311d5' width=180 ></video>
 
 
 <div align="right">[ <a href="#contents">↑ Back to top ↑</a> ]</div>
