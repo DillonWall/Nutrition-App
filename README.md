@@ -60,7 +60,7 @@ Light Theme | Dark Theme (Switching)
 ---
 
 ## Contributing
-Please help support the development of this addon by:
+Please help support development by:
 * Checking out the list of [open issues](https://github.com/DillonWall/Nutrition-App/issues?q=is%3Aissue+is%3Aopen+).
 * If you need new features, please open a [new issue](https://github.com/DillonWall/Nutrition-App/issues) or start a [discussion](https://github.com/DillonWall/Nutrition-App/discussions).
 * When creating a pull request, kindly consider the time it takes for reviewing and testing, and maintain proper coding style.
