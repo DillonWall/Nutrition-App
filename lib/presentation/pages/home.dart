@@ -1,13 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nutrition_app/core/constants/constants.dart';
 import 'package:nutrition_app/domain/entities/category_entity.dart';
 import 'package:nutrition_app/domain/entities/recipe_entity.dart';
-import 'package:nutrition_app/presentation/bloc/categories/remote/remote_categories_bloc.dart';
-import 'package:nutrition_app/presentation/bloc/random_recipes/remote/remote_random_recipes_bloc.dart';
+import 'package:nutrition_app/domain/use_cases/get_categories_use_case.dart';
+import 'package:nutrition_app/domain/use_cases/get_random_recipes_use_case.dart';
 import 'package:nutrition_app/presentation/widgets/app_bar_back_button.dart';
 import 'package:nutrition_app/presentation/widgets/circle_icon.dart';
 import 'package:nutrition_app/presentation/widgets/dark_mode_toggle.dart';
@@ -17,6 +15,7 @@ import 'package:nutrition_app/presentation/widgets/horizontal_carousel.dart';
 import 'package:nutrition_app/presentation/widgets/search_icon.dart';
 import 'package:nutrition_app/presentation/widgets/app_bar_settings_button.dart';
 import 'package:nutrition_app/presentation/widgets/small_headline.dart';
+import 'package:nutrition_app/presentation/widgets/loading_indicator.dart';
 import 'package:nutrition_app/presentation/widgets/vertical_carousel.dart';
 
 class HomePage extends StatefulWidget {
@@ -97,20 +96,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  BlocBuilder<RemoteCategoriesBloc, RemoteCategoriesState> _categoriesSection() {
-    return BlocBuilder<RemoteCategoriesBloc, RemoteCategoriesState>(
-      builder: (_, state) {
-        if (state is RemoteCategoriesLoading) {
-          return const Center(child: CupertinoActivityIndicator());
-        }
-        if (state is RemoteCategoriesError) {
-          return const Center(child: Icon(Icons.refresh));
-        }
-        if (state is RemoteCategoriesDone) {
-          return _categoriesSectionLoaded(state.categories!);
-        }
-        return Container();
-      },
+  LoadingIndicator<GetCategoriesUseCase> _categoriesSection() {
+    return LoadingIndicator<GetCategoriesUseCase>(
+      onLoadCreateWidget: (state) => _categoriesSectionLoaded(state.data!),
     );
   }
 
@@ -149,20 +137,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  BlocBuilder<RemoteRandomRecipesBloc, RemoteRandomRecipesState> _dietSection() {
-    return BlocBuilder<RemoteRandomRecipesBloc, RemoteRandomRecipesState>(
-      builder: (_, state) {
-        if (state is RemoteRandomRecipesLoading) {
-          return const Center(child: CupertinoActivityIndicator());
-        }
-        if (state is RemoteRandomRecipesError) {
-          return const Center(child: Icon(Icons.refresh));
-        }
-        if (state is RemoteRandomRecipesDone) {
-          return _dietSectionLoaded(state.recipes!);
-        }
-        return Container();
-      },
+  LoadingIndicator<GetRandomRecipesUseCase> _dietSection() {
+    return LoadingIndicator<GetRandomRecipesUseCase>(
+      onLoadCreateWidget: (state) => _dietSectionLoaded(state.data!),
     );
   }
 
@@ -233,20 +210,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  BlocBuilder<RemoteRandomRecipesBloc, RemoteRandomRecipesState> _popularSection() {
-    return BlocBuilder<RemoteRandomRecipesBloc, RemoteRandomRecipesState>(
-      builder: (_, state) {
-        if (state is RemoteRandomRecipesLoading) {
-          return const Center(child: CupertinoActivityIndicator());
-        }
-        if (state is RemoteRandomRecipesError) {
-          return const Center(child: Icon(Icons.refresh));
-        }
-        if (state is RemoteRandomRecipesDone) {
-          return _popularSectionLoaded(state.recipes!);
-        }
-        return Container();
-      },
+  LoadingIndicator<GetRandomRecipesUseCase> _popularSection() {
+    return LoadingIndicator<GetRandomRecipesUseCase>(
+      onLoadCreateWidget: (state) => _popularSectionLoaded(state.data!),
     );
   }
 

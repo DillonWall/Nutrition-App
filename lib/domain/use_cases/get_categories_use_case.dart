@@ -3,13 +3,15 @@ import 'package:nutrition_app/core/resources/use_case.dart';
 import 'package:nutrition_app/domain/entities/category_entity.dart';
 import 'package:nutrition_app/domain/repository/category_repository.dart';
 
-class GetCategoriesUseCase implements UseCase<DataState<List<CategoryEntity>>, void> {
+typedef GetCategoriesUseCaseDataType = DataState<List<CategoryEntity>>;
+
+class GetCategoriesUseCase extends UseCase<GetCategoriesUseCaseDataType, void> {
   final CategoryRepository _categoryRepository;
 
   GetCategoriesUseCase(this._categoryRepository);
 
   @override
-  Future<DataState<List<CategoryEntity>>> call({void params}) {
+  Future<GetCategoriesUseCaseDataType> call({void params}) {
     return _categoryRepository.getCategories();
   }
 }

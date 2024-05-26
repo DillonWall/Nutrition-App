@@ -13,17 +13,17 @@ class RecipeRepositoryImpl implements RecipeRepository {
   @override
   Future<DataState<List<RecipeModel>>> getRandomRecipes(int amount) async {
     try {
-      List<RecipeModel> recipies = [];
+      List<RecipeModel> recipes = [];
       for (int i = 0; i < amount; ++i) {
         DataState<RecipeModel> dataStateRecipe = await getRandomRecipe();
         if (dataStateRecipe is DataFailed) {
           return DataFailed(dataStateRecipe.error!);
         } else {
           assert(dataStateRecipe is DataSuccess);
-          recipies.add(dataStateRecipe.data!);
+          recipes.add(dataStateRecipe.data!);
         }
       }
-      return DataSuccess(recipies);
+      return DataSuccess(recipes);
     } on DioException catch (e) {
       return DataFailed(e);
     }
